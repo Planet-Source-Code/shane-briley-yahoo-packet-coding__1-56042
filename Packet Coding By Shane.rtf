@@ -1,0 +1,140 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fmodern\fprq1\fcharset0 Courier New;}{\f1\fswiss\fcharset0 Arial;}}
+{\colortbl ;\red255\green0\blue0;\red0\green0\blue255;\red0\green0\blue0;\red0\green128\blue0;}
+{\*\generator Msftedit 5.41.15.1503;}\viewkind4\uc1\pard\qc\cf1\b\f0\fs20 Packet Progamming Tutorial By: Shane\par
+\cf2 www.mortal-mind.com\par
+Copyright(c) 2004, 2005\par
+\par
+Contact Me @ ceo@mortal-mind.com If you have any questions!\par
+\par
+\pard\ul Part 1 Introduction\par
+\par
+\cf3\ulnone In this tutorial i hope to explain to you how to read and code Yahoo packets!\par
+So one day you will be able to make kick ass shit and own Yahoo lol!!\par
+This isnt to hard or to easy but once you read this you should have an ideal,\par
+of how to code packets and if not your dumb and delete this LOL! Just kidding,\par
+if you still dont understand send me an email and ill try to help you out!\par
+Well in this tutorial where going to code a SendPm Packet!\par
+Nothing to hard, I just want you to get the understand of this! One thing tho!\par
+Your not making something that isnt already made so as SthwarinG said \i "Dont Claim\par
+its your packet cause your just replicating Yahoos Packets" \i0 Now with that said,\par
+lets get coding!!\par
+\par
+What You Need:\par
+1: Packet Sniffer (if you dont have one get one from www.download.com)\par
+2: Open a blank module in your visual basic project!\par
+3: \i "This is must" \i0 You must have a good understanding and know how of vb!\par
+\par
+\par
+\cf2\ul Part 2 Packet Sniffing\ulnone\par
+\par
+\cf3 I use Commview, so if that is what your using open it up and set the ports rules for 5050 and select Both!\par
+Then once you have the set hit the play button and start sending stuff throw yahoo to,\par
+get the packets! Which you send a pm to yourself or a friend cause this is the first,\par
+packet we are going to look at!\par
+\par
+This is what you should see once you send the pm!\par
+\par
+\cf1 YMSG.....T......\'a1\lquote\'c4S5\'c0\'80shane____\'c0\'804\'c0\'80lamer_adamz\'c0\'80206\'c0\'802\'c0\'8097\'c0\'801\'c0\'8014\'c0\'80<font size="8">:))\'c0\'8063\'c0\'80;0\'c0\'8064\'c0\'800\'c0\'80\par
+\par
+\cf3 Now we have the pm packet! \cf2 YMSG.....T......\'a1\lquote\'c4S \cf3 << that is the header that is just a bunch of shit,\par
+that you do need as of right now!\par
+So all you really need right now is this \cf1 5\'c0\'80shane____\'c0\'804\'c0\'80lamer_adamz\'c0\'80206\'c0\'802\'c0\'8097\'c0\'801\'c0\'8014\'c0\'80<font size="8">:))\'c0\'8063\'c0\'80;0\'c0\'8064\'c0\'800\'c0\'80\par
+\par
+\cf2\ul Part 3 Coding The Packet\par
+\par
+\cf1\ulnone 0x0000   59 4D 53 47 00 00 00 00-00 54 00 \cf2 06\cf1  00 00 00 01   YMSG.....T......\par
+0x0010   A1 91 C4 53\cf3  \cf2 35 C0 80 69-67 6E 61 74 69 75 73 5F\cf3    \cf1\'a1\lquote\'c4S\cf2 5\'c0\'80shane____\cf3\par
+\cf2 0x0020   C0 80 34 C0 80 6C 61 6D-65 72 5F 61 64 61 6D 7A   \'c0\'804\'c0\'80lamer_adamz\par
+0x0030   C0 80 32 30 36 C0 80 32-C0 80 39 37 C0 80 31 C0   \'c0\'80206\'c0\'802\'c0\'8097\'c0\'801\'c0\par
+0x0040   80 31 34 C0 80 3C 66 6F-6E 74 20 73 69 7A 65 3D   \'8014\'c0\'80<font size=\par
+0x0050   22 38 22 3E 3A 29 29 C0-80 36 33 C0 80 3B 30 C0   "8">:))\'c0\'8063\'c0\'80;0\'c0\par
+0x0060   80 36 34 C0 80 30 C0 80-                          \'8064\'c0\'800\'c0\'80\par
+\par
+\cf3 Now there is your full packet with hex and ascii! I have color labeled them to help you,\par
+better understand what you are looking at! What is labeled in red is the header of the,\par
+packet which you really dont need intil latter! What is labeled in blue is your full packet!\par
+Which is what you will be coding! \i "This is a pmsend packet for those of you that forgot" \i0\par
+\par
+Now Lets code this bitch LOL! First you need to write the function sub which the packet will go in!\par
+\par
+\cf4 Public Function SendPM(WhoFrom As String, WhoTo As String, Message As String)As String\par
+\par
+End Function\par
+\par
+\cf3 Now there is your function! now lets add the packet to the function!\par
+\par
+\cf4 Public Function SendPM(WhoFrom As String, WhoTo As String, Message As String)As String\par
+\cf1 Dim Pck As String\par
+Pck = 5\'c0\'80shane____\'c0\'804\'c0\'80lamer_adamz\'c0\'80206\'c0\'802\'c0\'8097\'c0\'801\'c0\'8014\'c0\'80<font size="8">:))\'c0\'8063\'c0\'80;0\'c0\'8064\'c0\'800\'c0\'80\par
+\cf4\par
+End Function\par
+\par
+\cf3 Now did u see what i did there! Easy uh LOL! Now lets add the header to the packet!\par
+\par
+\cf4 Public Function SendPM(WhoFrom As String, WhoTo As String, Message As String)As String\par
+Dim Pck As String\par
+Pck = 5\'c0\'80shane____\'c0\'804\'c0\'80lamer_adamz\'c0\'80206\'c0\'802\'c0\'8097\'c0\'801\'c0\'8014\'c0\'80<font size="8">:))\'c0\'8063\'c0\'80;0\'c0\'8064\'c0\'800\'c0\'80\par
+\cf1 SendPM = Header("06",Pck)\par
+Debug.Print SendPM\cf4\par
+End Function\par
+\par
+\cf3 Quit easy right :))! Well i know you wondering how did i get the header/tp! Well lets go back,\par
+to the full packet that is in hex and ascii!\par
+\par
+\cf1 0x0000   59 4D 53 47 00 00 00 00-00 54 00 \cf2 06\cf1  00 00 00 01   YMSG.....T......\par
+0x0010   A1 91 C4 53\cf3  \cf2 35 C0 80 69-67 6E 61 74 69 75 73 5F\cf3    \cf1\'a1\lquote\'c4S\cf2 5\'c0\'80shane____\cf3\par
+\cf2 0x0020   C0 80 34 C0 80 6C 61 6D-65 72 5F 61 64 61 6D 7A   \'c0\'804\'c0\'80lamer_adamz\par
+0x0030   C0 80 32 30 36 C0 80 32-C0 80 39 37 C0 80 31 C0   \'c0\'80206\'c0\'802\'c0\'8097\'c0\'801\'c0\par
+0x0040   80 31 34 C0 80 3C 66 6F-6E 74 20 73 69 7A 65 3D   \'8014\'c0\'80<font size=\par
+0x0050   22 38 22 3E 3A 29 29 C0-80 36 33 C0 80 3B 30 C0   "8">:))\'c0\'8063\'c0\'80;0\'c0\par
+0x0060   80 36 34 C0 80 30 C0 80-                          \'8064\'c0\'800\'c0\'80\par
+\par
+\cf3 Now do u see \cf1 59 4D 53 47 \cf3 in the hex value of the packet? Well count over 8 spaces from the end,\par
+of \cf1 59 4D 53 47 \cf3 and you will see a \cf2 06 \cf3 well there is your header/tp! I hope you understand me so,\par
+far! Now lets code the packet the rest of the way!\par
+\par
+Now this is what we have so far! We need to finish turning this into a working pm packet!\par
+\par
+\cf4 Public Function SendPM(WhoFrom As String, WhoTo As String, Message As String)As String\par
+Dim Pck As String\par
+Pck = 5\'c0\'80shane____\'c0\'804\'c0\'80lamer_adamz\'c0\'80206\'c0\'802\'c0\'8097\'c0\'801\'c0\'8014\'c0\'80<font size="8">:))\'c0\'8063\'c0\'80;0\'c0\'8064\'c0\'800\'c0\'80\par
+SendPM = Header("06",Pck)\par
+Debug.Print SendPM\par
+End Function\par
+\par
+\cf3 Now what we do next is break the packet up and add the WhoFrom and WhoTo functions of the packet!\par
+shane_____ is who the pm is from and lamer_adamz is who the pm is too and <font size="8">:)) is \par
+the message of the pm!\par
+\par
+\cf4 Public Function SendPM(WhoFrom As String, WhoTo As String, Message As String)As String\par
+Dim Pck As String\par
+Pck = \cf1 "\cf4 5\'c0\'80\cf1 " & WhoFrom & "\cf4\'c0\'804\'c0\'80\cf1 " & WhoTo & "\cf4\'c0\'80206\'c0\'802\'c0\'8097\'c0\'801\'c0\'8014\'c0\'80\cf1 " & Message & "\cf4\'c0\'8063\'c0\'80;0\'c0\'8064\'c0\'800\'c0\'80\cf1 "\cf4\par
+SendPM = Header("06",Pck)\par
+Debug.Print SendPM\par
+End Function\par
+\par
+\cf3 Now you see how i replaces shane_____ with " & WhoFrom & " and lamer_adamz with " & WhoTo & " and \par
+<font size="8">:)) with " & Message & "\par
+Well now you have a fully coded pm packet that now should look like this!\par
+\par
+\cf4 Public Function SendPM(WhoFrom As String, WhoTo As String, Message As String)As String\par
+Dim Pck As String\par
+Pck = "5\'c0\'80" & WhoFrom & "\'c0\'804\'c0\'80" & WhoTo & "\'c0\'80206\'c0\'802\'c0\'8097\'c0\'801\'c0\'8014\'c0\'80" & Message & "\'c0\'8063\'c0\'80;0\'c0\'8064\'c0\'800\'c0\'80"\par
+SendPM = Header("06",Pck)\par
+Debug.Print SendPM\par
+End Function\par
+\par
+\cf3 Well i think i have explained this as clear and made it as understandable as i can! But as i have learned,\par
+over my time im a shitty teacher! But i think this tutorial will help you learn how to code packets and \par
+understand them alot better! Heres an example on how to call the packet and make it send!\par
+\par
+\cf1 Sock.SendData SendPM(Text1, Text3, "I Coded This Pm Packets :))")\cf3\par
+\par
+Well have fun and start making shit and feel free to put this on any site you want!!\par
+\par
+-Shane-\par
+ceo@mortal-mind.com\par
+www.mortal-mind.com\par
+Copyright(c) 2004, 2005\cf0\b0\f1\par
+}
+ 
